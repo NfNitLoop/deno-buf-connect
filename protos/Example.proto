@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example.v1;
+
+
+service ExampleService {
+    rpc Seq(SeqRequest) returns (stream SeqResponse) {}
+
+    rpc Unary(SeqRequest) returns (SeqResponse) {}
+}
+
+message SeqRequest {
+    int32 start_at = 1;
+}
+
+message SeqResponse {
+    int64 value = 1;
+}

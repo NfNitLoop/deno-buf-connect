@@ -1,0 +1,10 @@
+{
+    "tasks": {
+        "test": "deno task deno-test; deno task check",
+        "deno-test": "deno test --doc --unstable",
+        "check": "deno task check-server; deno task check-client; deno task check-oak",
+        "check-server": "deno check server.ts",
+        "check-client": "deno check client.ts",
+        "check-oak": "deno check oak_connect.ts",
+    }
+}
