@@ -1,0 +1,25 @@
+# See: https://buf.build/docs/generate/usage/#3.1.-create-a-buf.gen.yaml
+# NOTE: We're using the remote builder here, which sends your protobufs to
+# buf.build servers to process. 
+# If you prefer local generation, see the doc link above.
+
+version: v1
+managed:
+  enabled: true
+plugins:
+  - plugin: buf.build/bufbuild/es
+    out: gen
+
+    # NOTE: BufBuild's TypeScript generators default to using bare npm specifiers.
+    # You can rewrite them with the rewrite_imports directive, but the rewrite
+    # can't include a `:`, so you can't rewrite to a URL.
+    # So, create a local file like this to rewrite your import to.
+    # TODO: File a bug?
+    opt: target=ts,rewrite_imports=@bufbuild/protobuf:./bufbuild/protobuf.ts
+
+  - plugin: buf.build/bufbuild/connect-es
+    out: gen
+
+    # NOTE: You must specify import_extension=.ts here for Deno, else 
+    # bufbuild tries to import .js files, since that's what Node requires.
+    opt: "target=ts,import_extension=.ts,rewrite_imports=@bufbuild/protobuf:./bufbuild/protobuf.ts"

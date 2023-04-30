@@ -1,10 +1,9 @@
 {
     "tasks": {
-        "test": "deno task deno-test; deno task check",
-        "deno-test": "deno test --doc --unstable",
-        "check": "deno task check-server; deno task check-client; deno task check-oak",
-        "check-server": "deno check server.ts",
-        "check-client": "deno check client.ts",
-        "check-oak": "deno check oak_connect.ts",
+        "test": "deno task test-root; deno task test-example-oak; deno task check",
+        "test-root": "deno test --doc --unstable",
+        "test-example-oak": "cd examples/oak-server-and-client; deno task test",
+        "check": "deno task check-oak;",
+        "check-oak": "deno check middleware/oak/mod.ts",
     }
 }

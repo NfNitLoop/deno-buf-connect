@@ -1,5 +1,12 @@
-import { createPromiseClient } from "./_deps/bufbuild/connect.ts";
-import { createConnectTransport } from "./_deps/bufbuild/connect-web.ts";
+/**
+ * <https://connect.build/docs/web/getting-started/#generating-the-client>
+ * ... but in Deno. :) 
+ * 
+ * @module
+ */
+
+import { createPromiseClient } from "../../bufbuild/connect.ts";
+import { createConnectTransport } from "../../bufbuild/connect-web.ts";
 
 import { ExampleService } from "./gen/protos/Example_connect.ts"
 
@@ -15,8 +22,7 @@ const transport = createConnectTransport({
 // definition with the transport.
 const client = createPromiseClient(ExampleService, transport);
 
-
-let response = await client.unary({startAt: 4})
+const response = await client.unary({startAt: 2})
 console.log("unary:", response)
 
 for await (const response of client.seq({})) {

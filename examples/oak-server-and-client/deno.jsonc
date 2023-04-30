@@ -1,0 +1,19 @@
+{
+    "tasks": {
+        // Regenerate code based on the protobufs and buf*.yaml files
+        // You must install the buf CLI to do this.
+        // TODO: Can we instead invoke some TypeScript API and avoid installation?
+        "generate": "buf generate",
+
+        // Run the server:
+        "server": "deno run --allow-net --allow-env server/server.ts",
+
+        // Run the client:
+        "client": "deno run --allow-net --allow-env client.ts",
+
+        "test": "deno task check",
+        "check": "deno task check-server; deno task check-client",
+        "check-server": "deno check server/server.ts",
+        "check-client": "deno check client.ts",
+    }
+}

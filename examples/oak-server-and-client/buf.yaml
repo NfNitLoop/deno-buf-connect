@@ -1,3 +1,5 @@
+# See: https://buf.build/docs/generate/usage/#2.-define-a-module
+
 version: v1
 breaking:
   use:

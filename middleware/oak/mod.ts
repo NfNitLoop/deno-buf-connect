@@ -1,50 +1,57 @@
 /**
- * Buf Connect middleware for Oak.
+ * [Buf Connect] middleware for Oak.
  * 
- * Following the pattern from here:
+ * Developed by following the pattern here:
  * <https://github.com/bufbuild/connect-es/blob/main/packages/connect-express/src/express-connect-middleware.ts>
  * 
  * @module
  */
 
-import { ConnectRouter, ConnectRouterOptions, createConnectRouter } from "./_deps/bufbuild/connect.ts";
-import type { UniversalHandler, UniversalServerRequest, UniversalServerResponse } from "./_deps/bufbuild/connect/protocol.ts"
+import type { ConnectRouter, ConnectRouterOptions } from "../../bufbuild/connect.ts"
+import type { UniversalHandler, UniversalServerRequest, UniversalServerResponse } from "../../bufbuild/connect/protocol.ts"
 import * as oak from "./_deps/oak.ts"
 
 export interface Options extends ConnectRouterOptions {
     /**
      * A function to register your service(s) routes.
      */
-    routes: (router: ConnectRouter) => void
+    routes: (router: ConnectRouter) => void,
+
+    /**
+     * A builder function for the router to use for this middleware.
+     * 
+     * You can just pass this in from `@bufbuild/connect`.
+     * 
+     * This lets you upgrade bufbuild independently from this middleware.
+     * (Well, as long as the interface doesn't change.)
+
+     */
+    createConnectRouter: (opts?: ConnectRouterOptions) => ConnectRouter
 }
 
 export function middleware(
     options: Options
 ): oak.Middleware {
-    let router = createConnectRouter()
+    const router = options.createConnectRouter()
     options.routes(router)
 
     // Associate handlers by path:
     const handlers = new Map<string, UniversalHandler>()
     for (const handler of router.handlers) {
         handlers.set(handler.requestPath, handler)
-        console.log("registered path:", handler.requestPath)
     }
 
     const middleware = async (ctx: oak.Context, next: () => Promise<unknown>) => {
         const req = ctx.request
         const path = req.url.pathname
-        console.log("Got request on path:", path)
         const handler = handlers.get(path)
         if (!handler) {
             return next()
         }
-        console.log("Got handler")
 
         try {
             const response = await handler(universalRequest(ctx))
             setResponse(ctx, response)
-            console.log("set response", ctx.response)
         } catch (cause) {
             console.error(cause)
             ctx.response.body = "Oops, grpc error"
@@ -53,7 +60,6 @@ export function middleware(
     }
 
     return middleware
-
 }
 
 
@@ -65,8 +71,8 @@ function setResponse(ctx: oak.Context, response: UniversalServerResponse) {
     }
     ctx.response.body = response.body
     if (response.trailer) {
-        // TODO: Support this when necessary:
-        console.warn("Received trailers:", response.trailer)
+        // TODO: Support this when we support HTTP/2.
+        console.warn("Received trailers (unsupported):", response.trailer)
     }
 }
 
@@ -78,8 +84,7 @@ function universalRequest(ctx: oak.Context): UniversalServerRequest {
         method: req.method,
         body: readChunks(req),
 
-        // TODO: How do we detect HTTP 2 in Oak?
-        // See: https://github.com/oakserver/oak
+        // TODO: How do we detect/use HTTP 2 in Oak?
         httpVersion: "1.1", 
     }
 }
