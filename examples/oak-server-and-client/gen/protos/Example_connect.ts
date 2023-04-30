@@ -13,6 +13,8 @@ export const ExampleService = {
   typeName: "example.v1.ExampleService",
   methods: {
     /**
+     * Returns a sequence of numbers, starting from start_at.
+     *
      * @generated from rpc example.v1.ExampleService.Seq
      */
     seq: {
@@ -22,6 +24,8 @@ export const ExampleService = {
       kind: MethodKind.ServerStreaming,
     },
     /**
+     * Returns only a single response.
+     *
      * @generated from rpc example.v1.ExampleService.Unary
      */
     unary: {

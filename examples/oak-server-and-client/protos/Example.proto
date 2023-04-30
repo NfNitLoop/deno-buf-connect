@@ -4,12 +4,15 @@ package example.v1;
 
 
 service ExampleService {
+    // Returns a sequence of numbers, starting from start_at.
     rpc Seq(SeqRequest) returns (stream SeqResponse) {}
 
+    // Returns only a single response.
     rpc Unary(SeqRequest) returns (SeqResponse) {}
 }
 
 message SeqRequest {
+    // Where should we start generating our sequence?
     int32 start_at = 1;
 }
 

@@ -3,7 +3,6 @@
  * ... but in Deno. :) 
  * 
  * [View Source](https://github.com/NfNitLoop/deno-buf-connect/blob/main/examples/oak-server-and-client/client.ts)
-)
  * 
  * @module
  */

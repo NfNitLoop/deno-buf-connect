@@ -11,6 +11,8 @@ import { Message, proto3, protoInt64 } from "../bufbuild/protobuf.ts";
  */
 export class SeqRequest extends Message<SeqRequest> {
   /**
+   * Where should we start generating our sequence?
+   *
    * @generated from field: int32 start_at = 1;
    */
   startAt = 0;
