@@ -3,6 +3,10 @@
  * <https://connect.build/docs/node/getting-started>
  * 
  * However, this one uses middleware for serving gRPC via Oak in Deno.
+ * 
+ * [View Source](https://github.com/NfNitLoop/deno-buf-connect/blob/main/examples/oak-server-and-client/server/server.ts)
+ * 
+ * @module
  */
 
 import {yellow} from "https://deno.land/std@0.123.0/fmt/colors.ts"

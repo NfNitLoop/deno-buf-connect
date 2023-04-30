@@ -11,6 +11,8 @@ The author of this project is not affiliated with either the company or project.
 [Connect]: https://connect.build/
 [Buf]: https://buf.build/
 
+API Docs: <https://deno.land/x/buf_connect?doc>
+
 
 Oak Middleware
 --------------
@@ -22,8 +24,8 @@ in Oak, running in Deno.
 See the example server and client implementations in:
 [./examples/oak-server-and-client/]
 
-[./middleware/oak/mod.ts]: ./middleware/oak/mod.ts
-[./examples/oak-server-and-client/]: ./examples/oak-server-and-client/
+[./middleware/oak/mod.ts]: https://github.com/NfNitLoop/deno-buf-connect/blob/main/middleware/oak/mod.ts
+[./examples/oak-server-and-client/]: https://github.com/NfNitLoop/deno-buf-connect/tree/main/examples/oak-server-and-client#readme
 
 Bufbuild Re-exports
 -------------------
@@ -47,4 +49,4 @@ In addition to the previously-mentioned example *code* ([./examples/oak-server-a
 I also found getting the buf configuration right for Deno a bit finicky, so see
 [buf.gen.yaml] for an example you mind find useful to follow.
 
-[buf.gen.yaml]: ./examples/oak-server-and-client/buf.gen.yaml
+[buf.gen.yaml]: https://github.com/NfNitLoop/deno-buf-connect/blob/main/examples/oak-server-and-client/buf.gen.yaml

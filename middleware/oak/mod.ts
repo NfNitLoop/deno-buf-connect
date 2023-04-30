@@ -1,11 +1,33 @@
 /**
  * [Buf Connect] middleware for Oak.
  * 
- * Developed by following the pattern here:
- * <https://github.com/bufbuild/connect-es/blob/main/packages/connect-express/src/express-connect-middleware.ts>
+ * [Buf Connect]: https://connect.build/
+ * 
+ * Example
+ * -------
+ * 
+ * ```ts
+ * import * as oak from "https://deno.land/x/oak@v12.3.0/mod.ts"
+ * import { createConnectRouter, ConnectRouter } from "https://deno.land/x/buf_connect/bufbuild/connect.ts";
+ * import { middleware } from "./mod.ts"
+ * 
+ * function routes(router: ConnectRouter) {
+ *     // This is here for type checking of this example.
+ *     // For an example of how to define your routes, see:
+ *     // https://connect.build/docs/node/implementing-services#register-a-service
+ * }
+ * 
+ * const app = new oak.Application()
+ * app.use(middleware({routes, createConnectRouter}))
+ * 
+ * await app.listen({port: 8088})
+ * ```
  * 
  * @module
  */
+
+// Developed by following the pattern here:
+// <https://github.com/bufbuild/connect-es/blob/main/packages/connect-express/src/express-connect-middleware.ts>
 
 import type { ConnectRouter, ConnectRouterOptions } from "../../bufbuild/connect.ts"
 import type { UniversalHandler, UniversalServerRequest, UniversalServerResponse } from "../../bufbuild/connect/protocol.ts"

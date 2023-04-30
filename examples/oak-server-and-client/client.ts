@@ -2,6 +2,9 @@
  * <https://connect.build/docs/web/getting-started/#generating-the-client>
  * ... but in Deno. :) 
  * 
+ * [View Source](https://github.com/NfNitLoop/deno-buf-connect/blob/main/examples/oak-server-and-client/client.ts)
+)
+ * 
  * @module
  */
 

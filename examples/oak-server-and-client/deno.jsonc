@@ -11,7 +11,7 @@
         // Run the client:
         "client": "deno run --allow-net --allow-env client.ts",
 
-        "test": "deno task check",
+        "test": "deno task check; deno test --doc",
         "check": "deno task check-server; deno task check-client",
         "check-server": "deno check server/server.ts",
         "check-client": "deno check client.ts",
